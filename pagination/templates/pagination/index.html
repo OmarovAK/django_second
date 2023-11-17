@@ -1,0 +1,49 @@
+{% extends 'calculator/base.html' %}
+
+
+{% block main %}
+
+    <a href="{% url 'main_page' %}">Главная</a>
+
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Street</th>
+                <th>District</th>
+            </tr>
+        </thead>
+    <tbody>
+    {% for i in page %}
+        <tr>
+            <td>{{ i.Name }}</td>
+            <td>{{ i.Street }}</td>
+            <td>{{ i.District }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+
+
+            <div class="row p-2">
+                    <div class="col-sm">
+                        {% if page.has_previous %}
+                            <p class="text-start"><a class="btn btn-danger" href="?page_={{ page.previous_page_number }}">Назад</a></p>
+                        {% endif %}
+                    </div>
+                    <div class="col-sm">
+                       <p class="text-center fw-bold fst-italic">Страница № {{ num_page }}</p>
+                    </div>
+                    <div class="col-sm">
+                        {% if page.has_next %}
+                            <p class="text-end"><a class="btn btn-danger" href="?page_={{ page.next_page_number }}">Вперед</a></p>
+                        {% endif %}
+                    </div>
+            </div>
+
+
+
+
+
+{% endblock main %}

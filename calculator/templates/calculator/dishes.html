@@ -1,0 +1,34 @@
+{% extends 'calculator/base.html' %}
+
+
+{% block main %}
+<a href="{% url 'main_page' %}">Главная</a>
+
+<h1 class="text-center">Список блюд</h1>
+<ul class="list-group">
+{% for dish, ingredients in dishes.items %}
+    <li class="list-group-item">
+        <h2>{{dish}}</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th># п/п</th>
+                    <th>Ингредиент</th>
+                    <th>Количество</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ingred_, count in ingredients.items %}
+                    <tr>
+                        <th>{{ forloop.counter}}</th>
+                        <td>{{ingred_}}</td>
+                        <td>{{count}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a class="btn btn-primary" href="{% url 'detail_dish' dish %}" role="button">Подробнее</a>
+    </li>
+{% endfor %}
+</ul>
+{%  endblock main %}

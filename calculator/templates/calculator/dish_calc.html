@@ -1,0 +1,44 @@
+{% extends 'calculator/base.html' %}
+
+
+
+{% block main %}
+
+<h1 class="text-center">Блюдо: {{title.title}}</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th># п/п</th>
+                    <th>Ингредиент</th>
+                    <th>Единица измерения</th>
+                    <th>Количество на {{count_dish}} ед. {{title}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ingred_, count in dish_detail.items %}
+                    <tr>
+                        <th>{{ forloop.counter}}</th>
+                        {% for i in ingred_.split %}
+                        <td>{{i}}</td>
+                        {% endfor %}
+                        <td>{{count}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+
+<form action="" method="GET">
+    <div class="form-group row p-4">
+        <label for="number" class="col-sm-4 col-form-label">Введите количество блюд:</label>
+        <div class="col-sm-4">
+            <input class="form-control " type="number" size="3" name="num_dish" min="1" max="100" value="1" step="1" id="number">
+        </div>
+        <div class="col-sm-4">
+            <input class="form-control col-sm-4 btn btn-primary ml-2" type="submit" value="Рассчитать" >
+        </div>
+    </div>
+</form>
+
+<a class="btn btn-primary" href="{% url 'list_dishes' %}" role="button">Назад</a>
+{%  endblock main %}
